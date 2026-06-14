@@ -286,6 +286,23 @@ html{scroll-padding-top:66px}
   .nav-burger{display:block}
   .nav-cta .btn{padding:8px 14px;font-size:.82rem}
 }
+
+/* SCREENSHOT WALL */
+.rev-wall{columns:4 240px;column-gap:clamp(12px,1.5vw,18px);margin-top:clamp(24px,3.5vw,40px)}
+@media(max-width:900px){.rev-wall{columns:3 190px}}
+@media(max-width:620px){.rev-wall{columns:2 150px;column-gap:12px}}
+.rev-shot{break-inside:avoid;margin:0 0 clamp(12px,1.5vw,18px);width:100%;padding:0;border:0;background:none;cursor:zoom-in;display:block;border-radius:var(--r-md);overflow:hidden;box-shadow:0 14px 32px -20px rgba(19,18,17,.45);transition:transform .2s ease}
+.rev-shot:hover{transform:translateY(-3px)}
+.rev-shot img{width:100%;height:auto;display:block;border-radius:var(--r-md);border:1px solid var(--cream-line)}
+.chan{margin-top:clamp(44px,6vw,76px);display:flex;flex-direction:column;align-items:center;text-align:center}
+.chan h3{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(1.6rem,3.6vw,2.4rem);letter-spacing:-.01em;text-transform:uppercase;line-height:1.02;margin-bottom:clamp(20px,3vw,30px);color:var(--ink)}
+.chan-phone{position:relative;width:min(82vw,290px);border-radius:30px;overflow:hidden;border:7px solid #0a0a0a;box-shadow:0 34px 70px -28px rgba(19,18,17,.6),0 0 0 1px var(--cream-line)}
+.chan-phone video{width:100%;height:auto;display:block;background:#000}
+.chan-note{margin-top:1.1em;font-size:var(--fs-small);color:var(--ink-mute);max-width:34ch}
+.imgbox{position:fixed;inset:0;z-index:9999;background:rgba(8,7,6,.94);backdrop-filter:blur(5px);display:none;place-items:center;padding:clamp(14px,4vw,40px)}
+.imgbox.open{display:grid}
+.imgbox img{max-width:100%;max-height:92vh;border-radius:var(--r-md);box-shadow:0 40px 90px -30px #000}
+.imgbox-x{position:absolute;top:14px;right:18px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(240,239,234,.3);background:rgba(240,239,234,.1);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -561,6 +578,38 @@ html{scroll-padding-top:66px}
   </div>
 </section>
 
+<!-- ТЕКСТОВЫЕ ОТЗЫВЫ -->
+<section class="s-light s-pad" id="reviews-text">
+  <div class="wrap">
+    <div class="sec-head center"><span class="eyebrow">Текстовые отзывы · слово в слово</span><h2 class="h-sec">Сотни изменённых жизней</h2><p class="lead">Не обложки и не пересказ — реальные переписки, как написали сами. Нажми, чтобы открыть оригинал.</p></div>
+    <div class="rev-wall">
+      <button class="rev-shot" data-full="img/reviews/r01.png" aria-label="Отзыв 1"><img loading="lazy" src="img/reviews/r01.png" alt="Отзыв клиента 1"></button>
+      <button class="rev-shot" data-full="img/reviews/r02.png" aria-label="Отзыв 2"><img loading="lazy" src="img/reviews/r02.png" alt="Отзыв клиента 2"></button>
+      <button class="rev-shot" data-full="img/reviews/r03.png" aria-label="Отзыв 3"><img loading="lazy" src="img/reviews/r03.png" alt="Отзыв клиента 3"></button>
+      <button class="rev-shot" data-full="img/reviews/r04.png" aria-label="Отзыв 4"><img loading="lazy" src="img/reviews/r04.png" alt="Отзыв клиента 4"></button>
+      <button class="rev-shot" data-full="img/reviews/r05.png" aria-label="Отзыв 5"><img loading="lazy" src="img/reviews/r05.png" alt="Отзыв клиента 5"></button>
+      <button class="rev-shot" data-full="img/reviews/r06.png" aria-label="Отзыв 6"><img loading="lazy" src="img/reviews/r06.png" alt="Отзыв клиента 6"></button>
+      <button class="rev-shot" data-full="img/reviews/r07.png" aria-label="Отзыв 7"><img loading="lazy" src="img/reviews/r07.png" alt="Отзыв клиента 7"></button>
+      <button class="rev-shot" data-full="img/reviews/r08.png" aria-label="Отзыв 8"><img loading="lazy" src="img/reviews/r08.png" alt="Отзыв клиента 8"></button>
+      <button class="rev-shot" data-full="img/reviews/r09.png" aria-label="Отзыв 9"><img loading="lazy" src="img/reviews/r09.png" alt="Отзыв клиента 9"></button>
+      <button class="rev-shot" data-full="img/reviews/r10.png" aria-label="Отзыв 10"><img loading="lazy" src="img/reviews/r10.png" alt="Отзыв клиента 10"></button>
+      <button class="rev-shot" data-full="img/reviews/r11.png" aria-label="Отзыв 11"><img loading="lazy" src="img/reviews/r11.png" alt="Отзыв клиента 11"></button>
+      <button class="rev-shot" data-full="img/reviews/r12.png" aria-label="Отзыв 12"><img loading="lazy" src="img/reviews/r12.png" alt="Отзыв клиента 12"></button>
+      <button class="rev-shot" data-full="img/reviews/r13.png" aria-label="Отзыв 13"><img loading="lazy" src="img/reviews/r13.png" alt="Отзыв клиента 13"></button>
+      <button class="rev-shot" data-full="img/reviews/r14.png" aria-label="Отзыв 14"><img loading="lazy" src="img/reviews/r14.png" alt="Отзыв клиента 14"></button>
+      <button class="rev-shot" data-full="img/reviews/r15.png" aria-label="Отзыв 15"><img loading="lazy" src="img/reviews/r15.png" alt="Отзыв клиента 15"></button>
+      <button class="rev-shot" data-full="img/reviews/r16.png" aria-label="Отзыв 16"><img loading="lazy" src="img/reviews/r16.png" alt="Отзыв клиента 16"></button>
+      <button class="rev-shot" data-full="img/reviews/r17.png" aria-label="Отзыв 17"><img loading="lazy" src="img/reviews/r17.png" alt="Отзыв клиента 17"></button>
+    </div>
+    <div class="chan">
+      <h3>Листайте в канале,<br>пока палец не устанет</h3>
+      <div class="chan-phone"><video autoplay muted loop playsinline preload="metadata" poster="img/channel-poster.jpg"><source src="img/channel-scroll.mp4" type="video/mp4"></video></div>
+      <p class="chan-note">И это меньше десятой части. Остальное листается в канале с отзывами.</p>
+    </div>
+    <div class="mt center"><a class="btn" href="#join">Хочу в этот список</a></div>
+  </div>
+</section>
+
 <!-- ЦЕНА-РАЗВИЛКА -->
 <section class="s-light s-pad" id="join">
   <div class="wrap">
@@ -726,6 +775,19 @@ document.querySelectorAll('.video-play[data-kin]').forEach(function(b){
   var b=document.getElementById('navBurger');
   if(b)b.addEventListener('click',function(){nav.classList.toggle('open');});
   nav.querySelectorAll('.nav-links a, .nav-brand').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});
+})();
+</script>
+<div class="imgbox" id="imgbox" aria-hidden="true"><button class="imgbox-x" aria-label="Закрыть">×</button><img id="imgboxImg" src="" alt="Отзыв"></div>
+<script>
+(function(){
+  var box=document.getElementById('imgbox'); if(!box) return;
+  var img=document.getElementById('imgboxImg');
+  document.querySelectorAll('.rev-shot').forEach(function(b){
+    b.addEventListener('click',function(){img.src=b.dataset.full;box.classList.add('open');document.body.style.overflow='hidden';});
+  });
+  function close(){box.classList.remove('open');img.src='';document.body.style.overflow='';}
+  box.addEventListener('click',function(e){if(e.target===box||e.target.closest('.imgbox-x'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
 </body>
