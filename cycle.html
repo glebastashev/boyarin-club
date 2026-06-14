@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Клуб Андрея Боярина — выйти из цикла тревоги</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#EC592A; --orange-dark:#cf4a20; --orange-soft:rgba(236,89,42,.13);
+  --cream:#F0EFEA; --cream-2:#E7E5DD; --cream-line:#DAD7CD;
+  --dark:#131211; --dark-2:#1b1a18; --dark-line:rgba(240,239,234,.12);
+  --ink:#131211; --ink-soft:#54514b; --ink-mute:#7d7a72;
+  --on-dark:#F0EFEA; --on-dark-soft:rgba(240,239,234,.68); --on-dark-mute:rgba(240,239,234,.42);
+  --maxw:1080px; --readw:720px;
+  --r-sm:8px; --r-md:12px; --r-lg:16px;
+  --fs-small:.85rem; --fs-body:1rem; --fs-h3:clamp(1.35rem,2.3vw,1.65rem);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(15.5px,.38vw + 14px,17px);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{max-width:100%;overflow-x:clip}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--dark);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--orange);color:#fff}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+.read{max-width:var(--readw);margin-inline:auto}
+section{position:relative}
+.s-pad{padding-block:clamp(56px,9vw,100px)}
+.s-dark{background:var(--dark);color:var(--on-dark)}
+.s-light{background:var(--cream);color:var(--ink)}
+.s-accent{background:#211a16;color:var(--on-dark);border-top:2px solid var(--orange)}
+
+.bebas{font-family:'Bebas Neue','Inter',Impact,sans-serif;font-weight:400;letter-spacing:-.02em;line-height:.96;text-transform:uppercase}
+.eyebrow{display:inline-block;font-family:'Inter';font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange)}
+h2.h-sec{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:.98;letter-spacing:-.02em;text-transform:uppercase;margin-top:.45rem}
+.lead{font-size:clamp(1rem,1.1vw,1.1rem);line-height:1.6}
+.muted-d{color:var(--on-dark-soft)} .muted-l{color:var(--ink-soft)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;font-family:'Inter';font-weight:600;font-size:.95rem;letter-spacing:.01em;color:#fff;background:var(--orange);padding:13px 24px;border-radius:var(--r-md);border:none;cursor:pointer;text-align:center;box-shadow:0 6px 18px -8px rgba(236,89,42,.55);transition:transform .16s, background .16s}
+.btn:hover{transform:translateY(-1px);background:var(--orange-dark)}
+.btn.ghost{background:transparent;color:inherit;border:1px solid var(--dark-line);box-shadow:none}
+.btn.ghost.on-light{border-color:var(--cream-line);color:var(--ink-soft)}
+.btn.ghost:hover{background:rgba(240,239,234,.06)}
+.btn-meta{margin-top:.95rem;font-size:var(--fs-small);line-height:1.5}
+.btn-meta.on-dark{color:var(--on-dark-mute)} .btn-meta.on-light{color:var(--ink-mute)}
+
+.chev{display:flex;justify-content:center;margin-top:clamp(26px,4vw,40px);padding:6px 16px}
+.chev i{width:14px;height:14px;border-right:1.5px solid var(--on-dark-mute);border-bottom:1.5px solid var(--on-dark-mute);transform:rotate(45deg);display:block;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0);opacity:.55}50%{transform:rotate(45deg) translate(3px,3px);opacity:1}}
+
+/* HERO */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;text-align:center;overflow:hidden;background:var(--dark);color:var(--on-dark)}
+.hero .btn.ghost{border-color:rgba(240,239,234,.35);color:var(--on-dark)}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(80% 50% at 50% 38%,rgba(236,89,42,.20) 0%,rgba(236,89,42,.09) 38%,transparent 72%)}
+.hero-top{position:relative;z-index:3;padding:clamp(18px,3.4vh,30px) 20px clamp(2px,1vh,8px)}
+.pill{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--on-dark);padding:.55em 1.15em;border-radius:999px;border:1px solid var(--dark-line);background:rgba(240,239,234,.05);backdrop-filter:blur(4px)}
+.pill .dot{width:.45em;height:.45em;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}
+.hero-figure{position:relative;z-index:1;flex:1;min-height:clamp(270px,40vh,470px);overflow:hidden;pointer-events:none}
+.hero-fig-img{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(96vw,500px);height:auto;-webkit-mask-image:linear-gradient(to bottom,#000 56%,transparent 92%);mask-image:linear-gradient(to bottom,#000 56%,transparent 92%)}
+@media(min-width:861px){.hero-fig-img{width:auto;height:min(58vh,530px)}}
+@media(orientation:landscape) and (max-height:560px){.hero-figure{display:none}.hero-content{margin-top:0}}
+.hero-content{position:relative;z-index:2;margin-top:clamp(-130px,-11vh,-60px);padding:0 clamp(20px,5vw,40px) clamp(46px,7vh,64px)}
+.hero-title{font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:clamp(4.6rem,17vw,9.5rem);line-height:.86;letter-spacing:.01em;background:linear-gradient(180deg,#fff 0%,var(--cream) 58%,rgba(240,239,234,.62) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 26px rgba(0,0,0,.5))}
+.hero-sub{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.5rem,4.4vw,2.3rem);line-height:1.04;letter-spacing:.01em;text-transform:uppercase;max-width:30rem;margin:.55em auto 0;color:var(--on-dark);text-shadow:0 2px 16px rgba(0,0,0,.55)}
+.hero-sub b{color:var(--orange)}
+.hero-offer{max-width:34rem;margin:1.1em auto 0;color:var(--on-dark-soft);font-size:clamp(1rem,1.3vw,1.12rem);line-height:1.55}
+.hero-cta{margin-top:clamp(20px,2.6vh,28px);display:flex;flex-direction:column;align-items:center}
+.hero-btns{display:flex;gap:.7em;flex-wrap:wrap;justify-content:center}
+.hero .chev{position:absolute;bottom:0;left:0;right:0}
+
+/* VIDEO */
+.video-head{text-align:center;margin-bottom:clamp(26px,4vw,42px)}
+.video-frame{position:relative;width:100%;max-width:900px;margin-inline:auto;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--dark-line);box-shadow:0 30px 60px -34px rgba(0,0,0,.7);background:#000}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-play{position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:#0a0a0a;display:grid;place-items:center}
+.video-play.has-poster{background-size:cover;background-position:center top}
+.video-play.has-poster::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.5),rgba(10,9,8,.12) 48%,rgba(10,9,8,.3))}
+.video-play .play-btn{position:relative;z-index:1}
+.play-btn{width:clamp(64px,8vw,84px);height:clamp(64px,8vw,84px);border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;box-shadow:0 12px 32px -8px rgba(236,89,42,.6)}
+.play-btn::after{content:"";border-left:24px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:6px}
+
+/* SEC HEAD */
+.sec-head{max-width:var(--readw);margin-bottom:clamp(30px,4.5vw,50px)}
+.sec-head .lead{margin-top:.9rem}
+.s-dark .sec-head .lead{color:var(--on-dark-soft)} .s-light .sec-head .lead{color:var(--ink-soft)}
+.sec-head.center{text-align:center;margin-inline:auto}
+
+/* PAIN (нумерованный список) */
+.pain-list{display:flex;flex-direction:column;gap:clamp(24px,3.5vw,40px);margin-top:clamp(30px,4.5vw,48px)}
+.pain{display:grid;grid-template-columns:auto 1fr;gap:clamp(16px,3vw,28px);align-items:start}
+.pain + .pain{border-top:1px solid var(--cream-line);padding-top:clamp(24px,3.5vw,40px)}
+.s-dark .pain + .pain{border-top-color:var(--dark-line)}
+.pain-num{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(2.4rem,5vw,3rem);line-height:.8;color:var(--orange);padding-top:.04em}
+.pain h3{font-size:clamp(1.1rem,2vw,1.35rem);font-weight:700;line-height:1.25;margin-bottom:.45em;letter-spacing:-.01em}
+.s-light .pain p{color:var(--ink-soft)} .s-dark .pain p{color:var(--on-dark-soft)}
+
+/* DEPT GRID (карточки) */
+.dept-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,1.6vw,18px)}
+.dept-grid.g3{grid-template-columns:repeat(3,1fr)}
+.dept{border-radius:var(--r-md);padding:clamp(24px,2.8vw,34px);position:relative;overflow:hidden}
+.s-dark .dept{background:#100f0e;border:1px solid var(--dark-line)}
+.s-light .dept{background:#fff;border:1px solid var(--cream-line)}
+.s-accent .dept{background:rgba(240,239,234,.04);border:1px solid var(--dark-line)}
+.dept-head{display:flex;align-items:baseline;gap:.6em;margin-bottom:.7em}
+.dept-head h3{margin-bottom:0}
+.dept .num{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(2.1rem,3.4vw,2.7rem);line-height:.8;color:var(--orange);letter-spacing:.02em}
+.dept-sub{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9em}
+.s-dark .dept-sub,.s-accent .dept-sub{color:var(--on-dark-mute)} .s-light .dept-sub{color:var(--ink-mute)}
+.dept h3{font-family:'Bebas Neue',Impact,sans-serif;font-size:var(--fs-h3);font-weight:400;letter-spacing:-.01em;line-height:1;text-transform:uppercase;margin-bottom:.55em}
+.dept p{font-size:.97rem;line-height:1.5}
+.s-light .dept p{color:var(--ink-soft)} .s-dark .dept p,.s-accent .dept p{color:var(--on-dark-soft)}
+.dept .tag{display:block;margin-top:.9em;padding-top:.8em;font-size:var(--fs-small);border-top:1px solid var(--cream-line)}
+.s-dark .dept .tag,.s-accent .dept .tag{border-top-color:var(--dark-line);color:var(--on-dark-mute)}
+.s-light .dept .tag{color:var(--ink-mute)}
+.dept ul{list-style:none;display:flex;flex-direction:column;gap:.5em;margin-top:.3em}
+.dept ul li{position:relative;padding-left:1.1em;font-size:.95rem;line-height:1.4}
+.s-light .dept ul li{color:var(--ink-soft)} .s-dark .dept ul li,.s-accent .dept ul li{color:var(--on-dark-soft)}
+.dept ul li::before{content:"";position:absolute;left:0;top:.55em;width:.36em;height:.36em;border-radius:50%;background:var(--orange)}
+
+/* SPLIT (две колонки) */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+/* BEFORE/AFTER (сейчас → потом) */
+.ba-list{max-width:880px;margin-top:clamp(26px,4vw,40px)}
+.ba-head,.ba{display:grid;grid-template-columns:1fr 34px 1fr;gap:clamp(10px,1.8vw,20px);align-items:center}
+.ba-head{padding-bottom:.7em}
+.ba-head span{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+.ba-head span:last-child{color:var(--orange)}
+.ba{padding:clamp(14px,2vw,18px) 0;border-top:1px solid var(--cream-line)}
+.ba .now{color:var(--ink-mute)}
+.ba .arr{color:var(--orange);font-weight:700;text-align:center}
+.ba .aft{color:var(--ink);font-weight:600}
+@media(max-width:620px){.ba-head{display:none}.ba{grid-template-columns:1fr;gap:.3em}.ba .arr{display:none}.ba .aft::before{content:"→ ";color:var(--orange);font-weight:700}}
+
+/* QUOTE */
+.quote{font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.45;border-left:3px solid var(--orange);padding-left:22px;margin:1.4em 0;font-style:italic}
+.s-dark .quote{color:var(--cream)} .s-light .quote{color:var(--ink)}
+
+/* AUTHOR */
+.author-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+@media(max-width:760px){.author-grid{grid-template-columns:1fr}}
+.ava{width:54px;height:54px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:1.35rem;color:#fff;background:linear-gradient(135deg,var(--orange),#a8380f)}
+.mem-top{display:flex;align-items:center;gap:.75em;margin-bottom:.2em}
+.mem-top .mn{font-weight:700;line-height:1.15} .mem-top .mh{font-size:var(--fs-small);color:var(--on-dark-mute)}
+.author-num{background:rgba(240,239,234,.04);border:1px solid var(--dark-line);border-radius:var(--r-md);padding:clamp(22px,2.6vw,30px)}
+.author-num ul{list-style:none;display:flex;flex-direction:column;gap:.6em}
+.author-num li{position:relative;padding-left:1.2em;color:var(--on-dark-soft);line-height:1.4}
+.author-num li::before{content:"";position:absolute;left:0;top:.6em;width:.4em;height:.4em;border-radius:50%;background:var(--orange)}
+
+/* PRICING */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,22px);align-items:stretch}
+@media(max-width:760px){.price-grid{grid-template-columns:1fr}}
+.pcard{border-radius:var(--r-lg);padding:clamp(28px,3.4vw,40px);display:flex;flex-direction:column}
+.pcard.light{background:#fff;border:1px solid var(--cream-line)}
+.pcard.dark{background:var(--dark);color:var(--on-dark);box-shadow:0 30px 64px -40px rgba(19,18,17,.45)}
+.pcard .ptop{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(3rem,7vw,4.4rem);line-height:.82;letter-spacing:.01em;margin:.2em 0}
+.pcard.light .ptop{color:var(--ink)} .pcard .ptop span{font-size:.34em;color:var(--orange)}
+.pcard .pdesc{font-size:.97rem;margin-bottom:1em}
+.pcard.light .pdesc{color:var(--ink-soft)} .pcard.dark .pdesc{color:var(--on-dark-soft)}
+.pcard ul{list-style:none;display:flex;flex-direction:column;gap:.55em;margin:.5em 0 1.4em}
+.pcard li{position:relative;padding-left:1.5em;font-size:.95rem;line-height:1.4}
+.pcard.light li{color:var(--ink-soft)} .pcard.dark li{color:var(--on-dark-soft)}
+.pcard li::before{content:"✓";position:absolute;left:0;color:var(--orange);font-weight:700}
+.pcard .btn{width:100%;margin-top:auto}
+.pcard .pnote{font-size:var(--fs-small);margin-top:.9em}
+.pcard.light .pnote{color:var(--ink-mute)} .pcard.dark .pnote{color:var(--on-dark-mute)}
+.pcard .ptag{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.3em}
+
+/* COMPARE */
+.cmp{width:100%;border-collapse:collapse;margin-top:clamp(22px,3vw,34px)}
+.cmp td{padding:15px 4px;border-bottom:1px solid var(--dark-line);color:var(--on-dark-soft);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}
+.cmp td:last-child{text-align:right;color:var(--on-dark);font-weight:600;white-space:nowrap;padding-left:18px}
+
+/* FAQ */
+.faq{max-width:var(--readw);margin-inline:auto;margin-top:clamp(28px,4vw,44px)}
+details.qa{border-bottom:1px solid var(--cream-line)}
+details.qa summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1em;padding:clamp(18px,2.4vw,24px) 0;font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:var(--fs-h3);letter-spacing:.01em;line-height:1.1;text-transform:uppercase}
+details.qa summary::-webkit-details-marker{display:none}
+.qa .sign{flex:0 0 auto;width:1.3em;height:1.3em;position:relative}
+.qa .sign::before,.qa .sign::after{content:"";position:absolute;background:var(--orange);border-radius:2px;left:50%;top:50%;transform:translate(-50%,-50%)}
+.qa .sign::before{width:1em;height:2px} .qa .sign::after{width:2px;height:1em;transition:transform .25s}
+details[open] .sign::after{transform:translate(-50%,-50%) scaleY(0)}
+.qa .ans{padding:0 0 clamp(20px,2.4vw,24px);color:var(--ink-soft);font-size:1rem;max-width:64ch}
+
+/* TWO PATHS */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,18px);margin-top:clamp(28px,4vw,40px)}
+@media(max-width:680px){.paths{grid-template-columns:1fr}}
+.path{border-radius:var(--r-md);padding:clamp(24px,3vw,34px)}
+.path.bad{background:rgba(240,239,234,.04);border:1px solid var(--dark-line)}
+.path.good{background:var(--orange);color:#fff}
+.path .plbl{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9em}
+.path.bad .plbl{color:var(--on-dark-mute)} .path.good .plbl{color:rgba(255,255,255,.8)}
+.path h3{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:var(--fs-h3);text-transform:uppercase;margin-bottom:.5em}
+.path.bad p{color:var(--on-dark-soft)} .path.good p{color:rgba(255,255,255,.92)}
+
+/* FINAL */
+.final{text-align:center}
+.final p{max-width:40ch;margin:1.2em auto 0;color:var(--on-dark-soft);font-size:clamp(1rem,1.4vw,1.15rem)}
+.final .cta{margin-top:clamp(26px,4vw,38px);display:flex;flex-direction:column;align-items:center;gap:.8em}
+
+/* FOOTER */
+.footer{background:var(--dark);color:var(--on-dark-soft);padding-block:clamp(36px,5vw,56px);border-top:1px solid var(--dark-line)}
+.footer-brand{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.6rem;color:var(--on-dark);letter-spacing:.04em}
+.footer-tag{margin-top:.5em;font-size:var(--fs-small);color:var(--on-dark-mute)}
+
+.center{text-align:center} .mt{margin-top:clamp(20px,3vw,30px)}
+.hl{color:var(--on-dark);font-weight:600} .s-light .hl{color:var(--ink)}
+@media(min-width:861px){.hero::before{background:radial-gradient(34% 70% at 50% 35%,rgba(236,89,42,.17) 0%,rgba(236,89,42,.07) 44%,transparent 82%)}}
+@media(max-width:620px){.dept-grid,.dept-grid.g3{grid-template-columns:1fr}.pain{grid-template-columns:1fr;gap:.4em}}
+@media(max-width:560px){.hero-btns{flex-direction:column;width:100%;max-width:320px;margin-inline:auto}.hero-btns>.btn{width:100%}}
+@media(max-width:480px){.pill{letter-spacing:.18em;font-size:.64rem}}
+@media(hover:none){.btn:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;scroll-behavior:auto !important;transition:none !important}}
+.photo-port{width:100%;height:auto;display:block;border-radius:var(--r-md);border:1px solid var(--dark-line);box-shadow:0 30px 56px -34px rgba(0,0,0,.6)}
+
+/* VIDEO WALL */
+.vw-bar{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5em;margin-bottom:clamp(18px,2.6vw,26px)}
+.vw-count{display:flex;align-items:baseline;gap:.4em;line-height:1}
+.vw-count b{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(3.4rem,9vw,6rem);line-height:.78;color:var(--orange);letter-spacing:-.02em}
+.vw-count span{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.2rem,2.6vw,1.8rem);text-transform:uppercase;color:var(--on-dark);letter-spacing:-.01em;display:flex;flex-direction:column;line-height:1.02}
+.vw-count i{font-style:normal;font-size:.62em;color:var(--on-dark-mute);letter-spacing:.04em}
+.vw-arrows{display:flex;gap:.55em}
+.vw-arr{width:48px;height:48px;border-radius:50%;border:1px solid var(--dark-line);background:rgba(240,239,234,.05);color:var(--on-dark);display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s,opacity .15s;flex:0 0 auto}
+.vw-arr:hover{background:rgba(240,239,234,.1);border-color:var(--orange)}
+.vw-arr:disabled{opacity:.28;cursor:default;border-color:var(--dark-line)}
+.vw-arr svg{width:20px;height:20px}
+.vw-track{display:flex;gap:clamp(12px,1.5vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none}
+.vw-track::-webkit-scrollbar{display:none}
+.vw-card{flex:0 0 clamp(232px,25vw,300px);scroll-snap-align:start;cursor:pointer;background:none;border:0;padding:0;text-align:left;color:inherit;font:inherit;-webkit-tap-highlight-color:transparent}
+.vw-thumb{position:relative;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--dark-line);background:#0a0a0a}
+.vw-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.vw-card:hover .vw-thumb img{transform:scale(1.06)}
+.vw-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,8,.5),transparent 50%);pointer-events:none}
+.vw-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:clamp(46px,5vw,56px);height:clamp(46px,5vw,56px);border-radius:50%;background:var(--orange);display:grid;place-items:center;box-shadow:0 10px 28px -8px rgba(236,89,42,.7);transition:transform .15s}
+.vw-card:hover .vw-play{transform:translate(-50%,-50%) scale(1.09)}
+.vw-play::after{content:"";border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.vw-num{position:absolute;left:9px;top:9px;z-index:2;font-family:'Bebas Neue',Impact,sans-serif;font-size:.82rem;letter-spacing:.05em;color:var(--on-dark);background:rgba(10,9,8,.5);backdrop-filter:blur(3px);padding:.1em .5em;border-radius:6px}
+.vw-meta{display:flex;align-items:baseline;gap:.4em;margin-top:.65em;flex-wrap:wrap}
+.vw-meta .nm{font-weight:700;font-size:1rem;color:var(--on-dark)}
+.vw-meta .tg{font-size:var(--fs-small);color:var(--on-dark-mute)}
+.vw-more{flex:0 0 clamp(190px,20vw,230px);scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.45em;border:1.5px dashed var(--dark-line);border-radius:var(--r-md);color:var(--on-dark);text-align:center;padding:1.4em;aspect-ratio:16/9;transition:border-color .15s}
+.vw-more b{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--orange);line-height:.8}
+.vw-more span{font-size:var(--fs-small);color:var(--on-dark-soft);max-width:15ch}
+.vw-more:hover{border-color:var(--orange)}
+.vw-prog{height:4px;border-radius:99px;background:rgba(240,239,234,.1);margin-top:clamp(16px,2vw,22px);overflow:hidden}
+.vw-prog i{display:block;height:100%;width:10%;background:var(--orange);border-radius:99px;transition:width .18s ease}
+.vw-foot{margin-top:1.05em;font-size:var(--fs-small);color:var(--on-dark-soft);max-width:60ch}
+.vw-foot b{color:var(--on-dark)}
+.vw-modal{position:fixed;inset:0;z-index:9999;background:rgba(8,7,6,.93);backdrop-filter:blur(6px);display:none;place-items:center;padding:clamp(16px,4vw,40px)}
+.vw-modal.open{display:grid}
+.vw-modal-in{position:relative;width:100%;max-width:900px}
+.vw-modal-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 40px 90px -40px #000;background:#000}
+.vw-modal-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vw-modal-name{margin-top:.75em;color:var(--on-dark);font-weight:600;text-align:center}
+.vw-close{position:absolute;top:-46px;right:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(240,239,234,.3);background:rgba(240,239,234,.08);color:#fff;cursor:pointer;display:grid;place-items:center;font-size:22px;line-height:1}
+.vw-close:hover{background:rgba(240,239,234,.18)}
+@media(max-width:620px){.vw-card{flex-basis:76vw}.vw-more{flex-basis:58vw}.vw-bar{align-items:center}.vw-arrows{display:none}.vw-close{top:-42px}}
+
+/* NAV */
+html{scroll-padding-top:66px}
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;transform:translateY(-100%);transition:transform .3s ease;background:rgba(19,18,17,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--dark-line)}
+.nav.show{transform:translateY(0)}
+.nav-in{max-width:var(--maxw);margin-inline:auto;padding:.62em clamp(20px,5vw,40px);display:flex;align-items:center;justify-content:space-between;gap:1.4em}
+.nav-brand{display:flex;align-items:center;gap:.5em;font-family:'Bebas Neue',Impact,sans-serif;font-size:1.32rem;letter-spacing:.02em;color:var(--on-dark);white-space:nowrap}
+.nav-brand .dot{width:.4em;height:.4em;border-radius:50%;background:var(--orange)}
+.nav-links{display:flex;gap:clamp(1em,2.2vw,2.1em);list-style:none;margin:0}
+.nav-links a{font-size:.92rem;color:var(--on-dark-soft);transition:color .15s;white-space:nowrap}
+.nav-links a:hover{color:var(--on-dark)}
+.nav-cta{display:flex;align-items:center;gap:.85em}
+.nav-cta .btn{padding:9px 18px;font-size:.88rem}
+.nav-burger{display:none;width:28px;height:20px;position:relative;background:none;border:0;cursor:pointer;flex:0 0 auto}
+.nav-burger span{position:absolute;left:0;right:0;height:2px;background:var(--on-dark);border-radius:2px;transition:.25s}
+.nav-burger span:nth-child(1){top:0}.nav-burger span:nth-child(2){top:9px}.nav-burger span:nth-child(3){top:18px}
+.nav.open .nav-burger span:nth-child(1){top:9px;transform:rotate(45deg)}
+.nav.open .nav-burger span:nth-child(2){opacity:0}
+.nav.open .nav-burger span:nth-child(3){top:9px;transform:rotate(-45deg)}
+@media(max-width:760px){
+  .nav-links{position:absolute;top:100%;left:0;right:0;background:rgba(19,18,17,.97);backdrop-filter:blur(10px);flex-direction:column;gap:0;padding:0;border-bottom:1px solid var(--dark-line);max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .nav.open .nav-links{max-height:70vh}
+  .nav-links a{display:block;padding:.95em clamp(20px,5vw,40px);border-top:1px solid var(--dark-line);font-size:1rem}
+  .nav-burger{display:block}
+  .nav-cta .btn{padding:8px 14px;font-size:.82rem}
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="siteNav">
+  <div class="nav-in">
+    <a href="#top" class="nav-brand"><span class="dot"></span>Андрей Боярин</a>
+    <ul class="nav-links">
+      <li><a href="#video">Видео</a></li>
+      <li><a href="#training">Тренинг</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#join">Тарифы</a></li>
+      <li><a href="#faq">Вопросы</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn" href="#join">Зайти в клуб</a>
+      <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-top"><span class="pill"><span class="dot"></span>Клуб Андрея Боярина · психолог без цензуры</span></div>
+  <div class="hero-figure"><img class="hero-fig-img" src="img/hero-boyarin-cut.png" alt="Андрей Боярин"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Выйти<br>из цикла</h1>
+    <p class="hero-sub">Жить, а не <b>бороться</b> с тревогой</p>
+    <p class="hero-offer">Научись управлять своей тревогой и жить полноценно — не дожидаясь, пока она пройдёт. Для тех, кто уже обошёл психологов, перечитал книги, пересмотрел ютуб, но проблема возвращается.</p>
+    <div class="hero-cta">
+      <div class="hero-btns">
+        <a class="btn" href="#join">Зайти в клуб</a>
+        <a class="btn ghost" href="#video">Сначала посмотри видео</a>
+      </div>
+      <div class="btn-meta on-dark">Здесь не глушат тревогу и не разбирают её годами — учат справляться самому, конкретными инструментами</div>
+    </div>
+  </div>
+  <div class="chev"><i></i></div>
+</header>
+
+<!-- VIDEO -->
+<section class="s-dark s-pad" id="video">
+  <div class="wrap">
+    <div class="video-head">
+      <span class="eyebrow">Посмотри это сначала · 35 минут</span>
+      <h2 class="h-sec">Почему ты всё понимаешь, а легче не становится</h2>
+    </div>
+    <div class="video-frame"><button class="video-play has-poster" data-kin="ssN7RZTy2cBcim6UmimTER" aria-label="Смотреть видео" style="background-image:url(img/video-poster.jpg)"><span class="play-btn"></span></button></div>
+    <div class="hero-cta"><a class="btn" href="#join">Начать сейчас</a></div>
+  </div>
+</section>
+
+<!-- ПРОБЛЕМА -->
+<section class="s-light s-pad">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">С чего всё начинается</span><h2 class="h-sec">Что бы ты ни пробовал — тревога возвращается</h2></div>
+    <div class="pain-list">
+      <div class="pain"><div class="pain-num">01</div><div><h3>Если ходил к психологам</h3><p>Годами проговариваешь детство, вспоминаешь, плачешь на сессиях. Денег ушло прилично. А в реальной жизни всё ровно так же.</p></div></div>
+      <div class="pain"><div class="pain-num">02</div><div><h3>Если берёшь себя в руки</h3><p>Соберись, не раскисай, переключись, уйди в работу. Ты научился так держать лицо, что никто и не догадывается. Только внутри всё то же — и однажды это прорывается.</p></div></div>
+      <div class="pain"><div class="pain-num">03</div><div><h3>Если тащишь сам</h3><p>Книги, ютуб, медитации в приложении, Сафин с Питерсоном. Ты знаешь все умные слова. Понимаешь про себя всё. Не меняется ничего.</p></div></div>
+    </div>
+    <p class="mt muted-l">Дороги разные, а упираются в одно: тебя вели не туда. Лечили симптом или копали в детстве, к которому ты ещё не был готов, а корень всё это время оставался нетронутым.</p>
+  <div class="mt"><a class="btn" href="#join">Разорвать этот круг</a></div>
+  </div>
+</section>
+
+<!-- ТРЕТИЙ ПУТЬ -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head center"><span class="eyebrow">Есть третий путь</span><h2 class="h-sec">Тревожиться — навык. Спокойствие — тоже навык</h2><p class="lead">Ты годами тренировал тревогу — и натренировал, до автоматизма. Спокойствию учатся ровно так же. Здесь ты берёшь тревогу не за тот край, за который тянул всё это время: сначала опора и умение держать себя, и только потом — корень. В этом порядке оно наконец сдвигается. Выбор за тобой.</p></div>
+  <div class="mt center"><a class="btn" href="#join">Научиться спокойствию</a></div>
+  </div>
+</section>
+
+<!-- ЖИЗНЬ -->
+<section class="s-light s-pad">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h-sec">Как выглядит жизнь, когда тревога не рулит</h2><p class="lead">Ты остаёшься собой — просто без той фоновой тряски, что сейчас идёт через весь день.</p></div>
+    <div class="ba-list">
+      <div class="ba-head"><span>Сейчас</span><span></span><span>Спустя пару месяцев</span></div>
+      <div class="ba"><div class="now">Громкая музыка в такси — терпишь всю дорогу</div><div class="arr">→</div><div class="aft">Просишь выключить — без лишней мысли</div></div>
+      <div class="ba"><div class="now">Сказал «нет» — и грызёшь себя весь вечер</div><div class="arr">→</div><div class="aft">Сказал «нет» — и забыл через минуту</div></div>
+      <div class="ba"><div class="now">Мысль «а вдруг» раскручиваешь до бессонницы</div><div class="arr">→</div><div class="aft">Пришла и ушла — ты за ней не побежал</div></div>
+      <div class="ba"><div class="now">Ночью слушаешь сердце и крутишь мысле-жвачку</div><div class="arr">→</div><div class="aft">Ночью спишь</div></div>
+      <div class="ba"><div class="now">Обходишь звонки, разговоры, людей</div><div class="arr">→</div><div class="aft">Звонишь первым, когда надо</div></div>
+    </div>
+    <p class="mt muted-l">Дело не в силе воли, а в инструментах: у одного они есть, у другого нет. Им я и учу.</p>
+    <div class="mt"><a class="btn" href="#join">Хочу такие будни</a></div>
+  </div>
+</section>
+
+<!-- ТРИАДА -->
+<section class="s-accent s-pad">
+  <div class="wrap">
+    <div class="sec-head center"><span class="eyebrow">Одна жизнь. Три действия</span><h2 class="h-sec">К чему ты приходишь</h2></div>
+    <div class="dept-grid g3">
+      <div class="dept"><h3>Думать свободно</h3><p>Разрешить себе избавиться от установок, страхов и чужих убеждений, которые тебе вшили.</p></div>
+      <div class="dept"><h3>Проявлять себя</h3><p>Знакомиться, находить партнёров, заключать сделки, говорить с людьми без замирания и кома в горле.</p></div>
+      <div class="dept"><h3>Жить свободно</h3><p>Проживать любые дискомфортные ситуации в спокойствии и в согласии с собой, а не в тревоге.</p></div>
+    </div>
+  <div class="mt center"><a class="btn" href="#join">Жить свободно</a></div>
+  </div>
+</section>
+
+<!-- Я ПРОШЁЛ -->
+<section class="s-light s-pad">
+  <div class="wrap read">
+    <span class="eyebrow">Про это я знаю не из учебника</span>
+    <h2 class="h-sec">Как я сам из этого выбрался</h2>
+    <p class="mt muted-l">У меня было тревожное расстройство, психосоматика, булимия пять лет, страх женщин и страх просто заговорить с человеком. В девятнадцатом добавилась болезнь Бехтерева: я переставал ходить, а пятнадцать врачей так и не поняли, что со мной.</p>
+    <p class="mt muted-l">Я разобрался в этом сам и проверил на себе, как оно работает изнутри. Потом восемь лет отрабатывал на практике — в группах и на личных консультациях. Всё, что реально помогает, собрал в тренинг и клуб.</p>
+    <div class="mt"><a class="btn" href="#join">Пойти этим путём</a></div>
+  </div>
+</section>
+
+<!-- ПРОГРАММА: я с собой/близкими/миром -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Путь клуба</span><h2 class="h-sec">Я&nbsp;с&nbsp;собой → я&nbsp;с&nbsp;близкими → я&nbsp;с&nbsp;миром</h2><p class="lead">Это не случайный набор тем. Клуб расширяется кругами — от тебя наружу. Каждая ступень стоит на предыдущей, и перескочить её нельзя.</p></div>
+    <div class="dept-grid g3">
+      <div class="dept"><div class="dept-sub">Месяц 1 · Я с собой</div><div class="dept-head"><span class="num">01</span><h3>Тревога</h3></div><p>Сначала ты учишься быть с собой: понять, кто ты, перестать себя обманывать и выстроить опору внутри. Это фундамент — без него на каждом следующем шаге тебя будет сносить.</p></div>
+      <div class="dept"><div class="dept-sub">Месяц 2 · Я с близкими</div><div class="dept-head"><span class="num">02</span><h3>Отношения</h3></div><p>Когда опора есть, появляются отношения — и вскрывают всё, что в тебе осталось. Без первого шага тут нечего делать, тебя просто разнесёт. А с ним отношения становятся местом, где ты укрепляешься и углубляешься в свою жизнь.</p></div>
+      <div class="dept"><div class="dept-sub">Месяц 3 · Я с миром</div><div class="dept-head"><span class="num">03</span><h3>Коммуникация</h3></div><p>Дальше — мир. Страх чужих, претензии, комплексы, обесценивание. Здесь ты строишь реализацию, раскрываешь способности и растёшь через других. Безопасность, успех и удовольствие достижимы только в контакте с миром.</p></div>
+    </div>
+    <p class="mt center muted-d">Дальше — мужественность, искусство, история, ОКР, выгорание, деньги. Новая тема каждый месяц, и каждая — про то же: тебя, твоих близких и твой мир.</p>
+    <div class="hero-cta"><a class="btn" href="#join">Начать с себя</a></div>
+  </div>
+</section>
+
+<!-- ТРЕНИНГ 5 блоков -->
+<section class="s-light s-pad" id="training">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Главное в клубе · твой первый месяц</span><h2 class="h-sec">Тренинг от тревоги целиком</h2><p class="lead">Тот самый тренинг, который отдельно стоит $500, — это первый месяц в клубе за 50$. Пять блоков по порядку:</p></div>
+    <div class="dept-grid">
+      <div class="dept"><div class="dept-head"><span class="num">01</span><h3>Диагностика</h3></div><p>Даю анкету и чек-лист, по которым ты сам разберёшь, где корень — в голове или в теле. Половина того, что зовут тревогой, — это убитый сон, желудок и гормоны.</p><span class="tag">Уносишь: понимание, с чем имеешь дело. Часть людей здесь идёт к врачу — и это честно.</span></div>
+      <div class="dept"><div class="dept-head"><span class="num">02</span><h3>Саморегуляция</h3></div><p>Кнопка, которой себя выключаешь из паники. Аудио-практики дыхания под мой голос и работа с вниманием — учишься ловить мысль и отличать реальную от пустой.</p><span class="tag">Уносишь: умение успокоить себя за минуту, без таблетки.</span></div>
+      <div class="dept"><div class="dept-head"><span class="num">03</span><h3>Эмоции</h3></div><p>Дневник и пошаговый протокол — как чувство не глотать и не давить, а пропускать через себя. Тот навык, на котором ломаются почти все.</p><span class="tag">Уносишь: зазор между ударом и реакцией, где ты впервые выбираешь.</span></div>
+      <div class="dept"><div class="dept-head"><span class="num">04</span><h3>Схемы</h3></div><p>Разбираю все 18 схем по Янгу с живыми примерами, и ты находишь свои две-три ведущие. Это карта твоей психики.</p><span class="tag">Уносишь: видишь, почему раз за разом залетаешь в одну и ту же яму.</span></div>
+      <div class="dept"><div class="dept-head"><span class="num">05</span><h3>Работа с травмой</h3></div><p>Пошаговый метод спуска: берём сегодняшнюю реакцию, которая тебя бесит, и идём вниз — к чувству, от чувства к детской сцене, где всё завязалось.</p><span class="tag">Уносишь: разобранные эпизоды и свободу там, где раньше сносило.</span></div>
+      <div class="dept"><div class="dept-head"><span class="num">+</span><h3>Что ещё по ходу</h3></div><p>Токсичный схематоз, ловушки мышления, реконсолидация памяти, треугольник Карпмана, проработка родителей, шесть навыков общения, картина мира.</p><span class="tag">Всё в записи — видео, аудио-практики, дневники, протоколы.</span></div>
+    </div>
+    <div class="hero-cta" style="align-items:flex-start"><a class="btn" href="#join">Начать с тренинга</a></div>
+  </div>
+</section>
+
+<!-- РАЗДЕЛЫ КЛУБА -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Как устроено внутри</span><h2 class="h-sec">Что внутри клуба</h2><p class="lead">Клуб живёт в закрытом Telegram и в альтернативной платформе (работает без VPN). Тренинг открыт с первого дня.</p></div>
+    <div class="dept-grid">
+      <div class="dept"><h3>Тренинг от тревоги</h3><p>Пять блоков в записи: видео, аудио-практики, дневники, протоколы. В своём темпе.</p></div>
+      <div class="dept"><h3>Ежемесячные темы</h3><p>Новая большая тема каждый месяц — отношения, коммуникация и дальше по запросам участников.</p></div>
+      <div class="dept"><h3>Подкасты с разборами</h3><p>Разбираю реальные ситуации участников. Узнаёшь себя в чужих историях.</p></div>
+      <div class="dept"><h3>Закрытые эфиры</h3><p>Выхожу в прямой эфир, отвечаю на твои вопросы напрямую.</p></div>
+      <div class="dept"><h3>Разборы фильмов</h3><p>Кино через призму психологии — видишь механику людей там, где раньше видел сюжет.</p></div>
+      <div class="dept"><h3>Сообщество и куратор</h3><p>Закрытый чат, где люди тянут ту же работу. Куратор с психологическим образованием направит.</p></div>
+    </div>
+  <div class="mt"><a class="btn" href="#join">Открыть доступ</a></div>
+  </div>
+</section>
+
+<!-- ПОЧЕМУ ПОДПИСКА -->
+<section class="s-light s-pad">
+  <div class="wrap read">
+    <span class="eyebrow">Почему подписка, а не курс</span>
+    <h2 class="h-sec">Тревога не уходит за один присест</h2>
+    <p class="mt muted-l">Разовый курс — это снимок. Посмотрел, кивнул, закрыл вкладку — и остался один на один с практикой, которую делать месяцами.</p>
+    <p class="mt muted-l">Прорабатывать одно и то же годами в болтологии у психолога — другая крайность, дурка. Я против обоих вариантов.</p>
+    <p class="mt"><span class="hl">Работа с собой идёт не одним заходом.</span> <span class="muted-l">Нужна среда, где под рукой и материал, и практика, и человек, который поправит, когда застрял. Это как зал: туда не приходят один раз, туда ходят. Поэтому я сделал клуб — ты остаёшься в потоке, и работа доходит до результата, а не глохнет на второй неделе.</span></p>
+  <div class="mt"><a class="btn" href="#join">Остаться в потоке</a></div>
+  </div>
+</section>
+
+<!-- КТО ВЕДЁТ -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h-sec">Кто ведёт</h2></div>
+    <div class="author-grid">
+      <div>
+        <p class="hl" style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:.02em">Андрей Боярин</p>
+        <p class="muted-d" style="margin:.2em 0 1em">Психолог по работе с тревожными расстройствами</p>
+        <p class="muted-d">Боярин — настоящая фамилия. Офицер из Бреста: работал в МЧС начальником караула, вытаскивал людей из пожара. В 21 год руководил мужчинами вдвое старше себя.</p>
+        <p class="muted-d mt">Потом собственная жизнь рассыпалась — тревога, психосоматика, булимия, страхи, болезнь, из-за которой переставал ходить. Выбрался сам. Не теоретик с дипломом на стене — работаю с тем, что прошёл на своей шкуре.</p>
+        <div class="quote">«Вернуть себе спокойствие и умение выбирать, какие мысли смотреть, а какие выключать, — самый дорогой навык. Спокойствие — вот что бесценно всегда. Начинать нужно уже сегодня.»</div>
+      </div>
+      <div>
+        <img class="photo-port" src="img/boyarin-expert.jpeg" alt="Андрей Боярин" style="margin-bottom:clamp(14px,2vw,18px)">
+        <div class="author-num">
+        <p class="hl" style="margin-bottom:.8em">В цифрах</p>
+        <ul>
+          <li>Провёл 12 психологических групп</li>
+          <li>Более 400 клиентов и сотни изменённых жизней</li>
+          <li>8 лет практики, 1000+ часов консультаций</li>
+          <li>Своя методика работы с тревогой и социофобией</li>
+          <li>Опора на КПТ, схема-терапию Янга, mindfulness, EMDR</li>
+        </ul>
+        <p class="mt" style="color:var(--on-dark-mute);font-size:var(--fs-small)">Не смотри на корочки. Смотри на тех, кому я помог.</p>
+      </div>
+      </div>
+    </div>
+  <div class="mt"><a class="btn" href="#join">Работать с Андреем</a></div>
+  </div>
+</section>
+
+<!-- ТИПАЖИ -->
+<section class="s-light s-pad">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h-sec">Кто приходит в клуб</h2><p class="lead">Разные люди, одна общая история — тревога фоном через всю жизнь.</p></div>
+    <div class="dept-grid g3">
+      <div class="dept"><h3>Зажатый в работе</h3><p>Своё дело. Стесняется продавать, прокрастинирует, боится попросить нормальные деньги.</p><span class="tag">«Понимаю что делать, но что-то блокирует»</span></div>
+      <div class="dept"><h3>Замирающая в голове</h3><p>Тревожность фоном, заедание, уход в фантазии. Много думает, мало действует.</p><span class="tag">«Боюсь жизни, которую я хочу»</span></div>
+      <div class="dept"><h3>Аналитик-самозванец</h3><p>Скачки самооценки за день. Перечитал всё про психологию. Понимает — состояние не меняется.</p><span class="tag">«Слишком много читаю, слишком мало живу»</span></div>
+      <div class="dept"><h3>Заложник ОКР</h3><p>Навязчивые проверки и мысли. Дверь, телефон, симптомы. Знает, что иррационально.</p><span class="tag">«В голове крутится, и я этому верю»</span></div>
+      <div class="dept"><h3>В больных отношениях</h3><p>Гоняется за тем, кто обесценивает. Контроль через тревогу. Качели «сближение — скандал».</p><span class="tag">«Опять по тому же кругу»</span></div>
+      <div class="dept"><h3>Мать в тревоге</h3><p>Негативные мысли вокруг детей и близких. Контролирует через страх.</p><span class="tag">«Живу только когда они рядом»</span></div>
+    </div>
+    <div class="mt center"><a class="btn" href="#join">Это про меня</a></div>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section class="s-dark s-pad" id="reviews">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Видео-отзывы</span><h2 class="h-sec">Десятки человек рассказали, что у них изменилось</h2><p class="lead">Включи любого прямо сейчас.</p></div>
+    <div class="vw-bar">
+      <div class="vw-count"><b id="vwCur">01</b><span>из 38<i>видео-отзывов</i></span></div>
+      <div class="vw-arrows"><button class="vw-arr" id="vwPrev" aria-label="назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><button class="vw-arr" id="vwNext" aria-label="вперёд"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></div>
+    </div>
+    <div class="vw-track" id="vwTrack" data-total="38">
+      <button class="vw-card" data-vid="RBVonPX4zcQ" data-name="Елена"><div class="vw-thumb"><span class="vw-num">01</span><img loading="lazy" src="https://i.ytimg.com/vi/RBVonPX4zcQ/hqdefault.jpg" alt="Видео-отзыв · Елена"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Елена</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="5x_DerD0Gos" data-name="Анастасия"><div class="vw-thumb"><span class="vw-num">02</span><img loading="lazy" src="https://i.ytimg.com/vi/5x_DerD0Gos/hqdefault.jpg" alt="Видео-отзыв · Анастасия"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Анастасия</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="S77XuAz0BqM" data-name="Аделина"><div class="vw-thumb"><span class="vw-num">03</span><img loading="lazy" src="https://i.ytimg.com/vi/S77XuAz0BqM/hqdefault.jpg" alt="Видео-отзыв · Аделина"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Аделина</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="VqTsYUFvYt4" data-name="Алексей"><div class="vw-thumb"><span class="vw-num">04</span><img loading="lazy" src="https://i.ytimg.com/vi/VqTsYUFvYt4/hqdefault.jpg" alt="Видео-отзыв · Алексей"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Алексей</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="WUWjeWzgSc8" data-name="Ирина"><div class="vw-thumb"><span class="vw-num">05</span><img loading="lazy" src="https://i.ytimg.com/vi/WUWjeWzgSc8/hqdefault.jpg" alt="Видео-отзыв · Ирина"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Ирина</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="-Qztx11O1zI" data-name="Виктория"><div class="vw-thumb"><span class="vw-num">06</span><img loading="lazy" src="https://i.ytimg.com/vi/-Qztx11O1zI/hqdefault.jpg" alt="Видео-отзыв · Виктория"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Виктория</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="QZNCJxSW_18" data-name="Анна"><div class="vw-thumb"><span class="vw-num">07</span><img loading="lazy" src="https://i.ytimg.com/vi/QZNCJxSW_18/hqdefault.jpg" alt="Видео-отзыв · Анна"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Анна</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="MteLqvDW-o8" data-name="Виктор"><div class="vw-thumb"><span class="vw-num">08</span><img loading="lazy" src="https://i.ytimg.com/vi/MteLqvDW-o8/hqdefault.jpg" alt="Видео-отзыв · Виктор"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Виктор</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="IvzwbiqWUM0" data-name="Полина"><div class="vw-thumb"><span class="vw-num">09</span><img loading="lazy" src="https://i.ytimg.com/vi/IvzwbiqWUM0/hqdefault.jpg" alt="Видео-отзыв · Полина"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Полина</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="XR5HpBQem94" data-name="Евгения"><div class="vw-thumb"><span class="vw-num">10</span><img loading="lazy" src="https://i.ytimg.com/vi/XR5HpBQem94/hqdefault.jpg" alt="Видео-отзыв · Евгения"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Евгения</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="UDxv-bEDJOQ" data-name="Нажия"><div class="vw-thumb"><span class="vw-num">11</span><img loading="lazy" src="https://i.ytimg.com/vi/UDxv-bEDJOQ/hqdefault.jpg" alt="Видео-отзыв · Нажия"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Нажия</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="Nic8Op3Jhmw" data-name="Рамиль"><div class="vw-thumb"><span class="vw-num">12</span><img loading="lazy" src="https://i.ytimg.com/vi/Nic8Op3Jhmw/hqdefault.jpg" alt="Видео-отзыв · Рамиль"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Рамиль</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="8vr1s_W2KhA" data-name="Досхан"><div class="vw-thumb"><span class="vw-num">13</span><img loading="lazy" src="https://i.ytimg.com/vi/8vr1s_W2KhA/hqdefault.jpg" alt="Видео-отзыв · Досхан"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Досхан</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="3G9u9ruoE74" data-name="Никита"><div class="vw-thumb"><span class="vw-num">14</span><img loading="lazy" src="https://i.ytimg.com/vi/3G9u9ruoE74/hqdefault.jpg" alt="Видео-отзыв · Никита"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Никита</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="wGskHSh6pQk" data-name="Ольга"><div class="vw-thumb"><span class="vw-num">15</span><img loading="lazy" src="https://i.ytimg.com/vi/wGskHSh6pQk/hqdefault.jpg" alt="Видео-отзыв · Ольга"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Ольга</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="vPLkO8xM8uw" data-name="Соня"><div class="vw-thumb"><span class="vw-num">16</span><img loading="lazy" src="https://i.ytimg.com/vi/vPLkO8xM8uw/hqdefault.jpg" alt="Видео-отзыв · Соня"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Соня</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="-awoHhvyT1w" data-name="Аида"><div class="vw-thumb"><span class="vw-num">17</span><img loading="lazy" src="https://i.ytimg.com/vi/-awoHhvyT1w/hqdefault.jpg" alt="Видео-отзыв · Аида"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Аида</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="4g_0J79pKAQ" data-name="Екатерина"><div class="vw-thumb"><span class="vw-num">18</span><img loading="lazy" src="https://i.ytimg.com/vi/4g_0J79pKAQ/hqdefault.jpg" alt="Видео-отзыв · Екатерина"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Екатерина</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="8_FMgJpCsnI" data-name="Антон"><div class="vw-thumb"><span class="vw-num">19</span><img loading="lazy" src="https://i.ytimg.com/vi/8_FMgJpCsnI/hqdefault.jpg" alt="Видео-отзыв · Антон"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Антон</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="9bp7inQB8wU" data-name="Адель"><div class="vw-thumb"><span class="vw-num">20</span><img loading="lazy" src="https://i.ytimg.com/vi/9bp7inQB8wU/hqdefault.jpg" alt="Видео-отзыв · Адель"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Адель</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="KW5ywUs8jFw" data-name="Гио"><div class="vw-thumb"><span class="vw-num">21</span><img loading="lazy" src="https://i.ytimg.com/vi/KW5ywUs8jFw/hqdefault.jpg" alt="Видео-отзыв · Гио"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Гио</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="LwZ5bPNBjss" data-name="Настя"><div class="vw-thumb"><span class="vw-num">22</span><img loading="lazy" src="https://i.ytimg.com/vi/LwZ5bPNBjss/hqdefault.jpg" alt="Видео-отзыв · Настя"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Настя</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="UoTY7OC8FEU" data-name="Евгений"><div class="vw-thumb"><span class="vw-num">23</span><img loading="lazy" src="https://i.ytimg.com/vi/UoTY7OC8FEU/hqdefault.jpg" alt="Видео-отзыв · Евгений"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Евгений</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="VD5M2cGbzVg" data-name="Иван"><div class="vw-thumb"><span class="vw-num">24</span><img loading="lazy" src="https://i.ytimg.com/vi/VD5M2cGbzVg/hqdefault.jpg" alt="Видео-отзыв · Иван"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Иван</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="_uZptuVevlo" data-name="Миндаугас"><div class="vw-thumb"><span class="vw-num">25</span><img loading="lazy" src="https://i.ytimg.com/vi/_uZptuVevlo/hqdefault.jpg" alt="Видео-отзыв · Миндаугас"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Миндаугас</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="dV_9JmT8oww" data-name="Алёна"><div class="vw-thumb"><span class="vw-num">26</span><img loading="lazy" src="https://i.ytimg.com/vi/dV_9JmT8oww/hqdefault.jpg" alt="Видео-отзыв · Алёна"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Алёна</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="fA5Bk8PEYas" data-name="Алексей"><div class="vw-thumb"><span class="vw-num">27</span><img loading="lazy" src="https://i.ytimg.com/vi/fA5Bk8PEYas/hqdefault.jpg" alt="Видео-отзыв · Алексей"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Алексей</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="pW7MHhAuv4U" data-name="Алёна"><div class="vw-thumb"><span class="vw-num">28</span><img loading="lazy" src="https://i.ytimg.com/vi/pW7MHhAuv4U/hqdefault.jpg" alt="Видео-отзыв · Алёна"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Алёна</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="vHPQvA5TSFU" data-name="Иван и Мария"><div class="vw-thumb"><span class="vw-num">29</span><img loading="lazy" src="https://i.ytimg.com/vi/vHPQvA5TSFU/hqdefault.jpg" alt="Видео-отзыв · Иван и Мария"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Иван и Мария</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="NG4qqTH8MPI" data-name="Валерий"><div class="vw-thumb"><span class="vw-num">30</span><img loading="lazy" src="https://i.ytimg.com/vi/NG4qqTH8MPI/hqdefault.jpg" alt="Видео-отзыв · Валерий"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Валерий</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="TbomUZyRsn0" data-name="Мария"><div class="vw-thumb"><span class="vw-num">31</span><img loading="lazy" src="https://i.ytimg.com/vi/TbomUZyRsn0/hqdefault.jpg" alt="Видео-отзыв · Мария"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Мария</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="z_KvFae1JIc" data-name="Анастасия"><div class="vw-thumb"><span class="vw-num">32</span><img loading="lazy" src="https://i.ytimg.com/vi/z_KvFae1JIc/hqdefault.jpg" alt="Видео-отзыв · Анастасия"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Анастасия</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="zhrgxN9ZOjg" data-name="Алёна"><div class="vw-thumb"><span class="vw-num">33</span><img loading="lazy" src="https://i.ytimg.com/vi/zhrgxN9ZOjg/hqdefault.jpg" alt="Видео-отзыв · Алёна"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Алёна</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="sKA0VYeg2fA" data-name="Анастасия"><div class="vw-thumb"><span class="vw-num">34</span><img loading="lazy" src="https://i.ytimg.com/vi/sKA0VYeg2fA/hqdefault.jpg" alt="Видео-отзыв · Анастасия"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Анастасия</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="ui8sJRIxyjU" data-name="Андрей"><div class="vw-thumb"><span class="vw-num">35</span><img loading="lazy" src="https://i.ytimg.com/vi/ui8sJRIxyjU/hqdefault.jpg" alt="Видео-отзыв · Андрей"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Андрей</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="qDY-1rfy0v0" data-name="Данила"><div class="vw-thumb"><span class="vw-num">36</span><img loading="lazy" src="https://i.ytimg.com/vi/qDY-1rfy0v0/hqdefault.jpg" alt="Видео-отзыв · Данила"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Данила</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="ky5ssjGpsN8" data-name="Максим"><div class="vw-thumb"><span class="vw-num">37</span><img loading="lazy" src="https://i.ytimg.com/vi/ky5ssjGpsN8/hqdefault.jpg" alt="Видео-отзыв · Максим"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Максим</span><span class="tg">· видео-отзыв</span></div></button>
+      <button class="vw-card" data-vid="EmDmbEjEqFE" data-name="Кристина"><div class="vw-thumb"><span class="vw-num">38</span><img loading="lazy" src="https://i.ytimg.com/vi/EmDmbEjEqFE/hqdefault.jpg" alt="Видео-отзыв · Кристина"><span class="vw-play"></span></div><div class="vw-meta"><span class="nm">Кристина</span><span class="tg">· видео-отзыв</span></div></button>
+      <a class="vw-more" href="https://www.youtube.com/playlist?list=PLJgB-5v9R0siz7vESA_b81l-fuBUXiQMR" target="_blank" rel="noopener"><b>Все</b><span>видео-истории целиком — открыть плейлист →</span></a>
+    </div>
+    <div class="vw-prog"><i id="vwProg"></i></div>
+    <p class="vw-foot">И это только видео — письменных отзывов ещё <b>сотни</b>.</p>
+  <div class="mt"><a class="btn" href="#join">Хочу такой же результат →</a></div>
+  </div>
+</section>
+
+<!-- ЦЕНА-РАЗВИЛКА -->
+<section class="s-light s-pad" id="join">
+  <div class="wrap">
+    <div class="sec-head center"><h2 class="h-sec">Тарифы</h2><p class="lead">Один клуб, три способа зайти. Чем длиннее период — тем дешевле. В любом тарифе открыто всё с первого дня.</p></div>
+    <div class="price-grid">
+      <div class="pcard light">
+        <div class="ptag">Месяц</div>
+        <div class="ptop">$50<span> /мес</span></div>
+        <div class="pdesc">Помесячно, чтобы попробовать. Тренинг от тревоги — это твой первый месяц.</div>
+        <ul><li>Весь тренинг от тревоги — первый месяц</li><li>Новая тема каждый месяц</li><li>Эфиры, подкасты, разборы фильмов</li><li>Сообщество и куратор</li></ul>
+        <a class="btn ghost on-light" href="#">Зайти на месяц — $50</a>
+        <p class="pnote">Рекуррентный платёж · отмена в один клик</p>
+      </div>
+      <div class="pcard light">
+        <div class="ptag">3 месяца · стержень</div>
+        <div class="ptop">$125<span> /3 мес</span></div>
+        <div class="pdesc">Тревога → отношения → коммуникация. Все три ступени подряд. Экономия $25 к помесячной.</div>
+        <ul><li>Всё из тарифа «Месяц»</li><li>Три ступени подряд, без перерыва</li><li>Темп, в котором меняется жизнь, а не настроение</li><li>Доступ на 3 месяца</li></ul>
+        <a class="btn ghost on-light" href="#">Зайти на 3 месяца — $125</a>
+        <p class="pnote">Разовый платёж за период</p>
+      </div>
+      <div class="pcard dark">
+        <div class="ptag">Год · выгоднее всего</div>
+        <div class="ptop">$500<span> /год</span></div>
+        <div class="pdesc">Ровно цена одного тренинга отдельно — только внутри весь клуб на год. Экономия $100.</div>
+        <ul><li>Весь клуб на 12 месяцев</li><li>Каждая новая тема — сразу твоя</li><li>Тренинг + отношения + общение + всё дальше</li><li>Цена как у одного тренинга, а внутри — всё</li></ul>
+        <a class="btn" href="#">Зайти на год — $500</a>
+        <p class="pnote">Разовый платёж · доступ 12 месяцев</p>
+      </div>
+    </div>
+    <p class="mt center muted-l" style="max-width:700px;margin-inline:auto"><span class="hl">Посчитай.</span> Помесячно за год выходит $600. Годовой тариф — $500, и это ровно цена одного тренинга отдельно. Только внутри не один блок, а весь клуб: тревога, отношения, общение и всё, что дальше.</p>
+  </div>
+</section>
+
+<!-- СРАВНЕНИЕ -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h-sec">С чем это сравнить</h2><p class="lead">Пока ты в клубе, тебе не нужно:</p></div>
+    <table class="cmp">
+      <tr><td>Психотерапия один на один</td><td>от $100 за сессию · $400–800/мес</td></tr>
+      <tr><td>Тот же тренинг от тревоги отдельно</td><td>$500 разово</td></tr>
+      <tr><td>Отдельные курсы по отношениям, самооценке</td><td>$100–500 каждый</td></tr>
+      <tr><td>Приложения для медитации и сна</td><td>~$10/мес</td></tr>
+      <tr><td>Цена несостоявшейся жизни на избеганиях</td><td>не измеряется</td></tr>
+    </table>
+    <p class="mt"><span class="hl">Один месяц клуба — $50.</span> <span class="muted-d">Меньше, чем одна сессия у психолога, и в десять раз дешевле отдельного тренинга.</span></p>
+    <div class="mt"><a class="btn" href="#join">Это выгоднее — беру</a></div>
+  </div>
+</section>
+
+<!-- ГАРАНТИЯ -->
+<section class="s-light s-pad">
+  <div class="wrap read center">
+    <h2 class="h-sec">Первый месяц — посмотреть и решить</h2>
+    <p class="lead mt muted-l">Заходишь за $50 — внутри сразу всё: тренинг, материалы, эфиры, чат. Не твоё — отписываешься в один клик, доступ остаётся до конца оплаченного месяца. Без «а что именно не понравилось» и без удержаний.</p>
+    <div class="mt"><a class="btn" href="#join">Попробовать месяц</a></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s-light s-pad" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center"><h2 class="h-sec">Частые вопросы</h2></div>
+    <div class="faq">
+      <details class="qa"><summary>Я уже пробовал, мне не помогло<span class="sign"></span></summary><div class="ans">Скорее всего, начинали не с того конца — с детства на первой сессии. Здесь детство последнее, ты подходишь к нему уже с инструментами. Другой порядок — другой результат.</div></details>
+      <details class="qa"><summary>Почему подписка, а не разовая покупка<span class="sign"></span></summary><div class="ans">Потому что тревога не лечится за месяц и не живёт отдельно от отношений и общения. Клуб — это среда, в которой работа доходит до результата, а не курс, который кончился.</div></details>
+      <details class="qa"><summary>Я на антидепрессантах. Мне можно?<span class="sign"></span></summary><div class="ans">Клуб не отменяет и не заменяет назначения врача. Это работа с психологической механикой тревоги параллельно. Решения о препаратах — только с твоим врачом.</div></details>
+      <details class="qa"><summary>А если у меня острое состояние?<span class="sign"></span></summary><div class="ans">Если сейчас клиническая депрессия, частые панические атаки или мысли уйти из жизни — тебе сначала к врачу, а не на курс. Это честно.</div></details>
+      <details class="qa"><summary>Зайду, пройду тренинг — могу отписаться?<span class="sign"></span></summary><div class="ans">Да, в любой момент. Но большинство остаётся, потому что дальше идёт работа с тем, где тревога реально мешает — отношения, общение.</div></details>
+      <details class="qa"><summary>А я могу не достигнуть результата?<span class="sign"></span></summary><div class="ans">Это будет достаточно сложно. К цели не приходят только те, кто совсем не делает практику. Клуб работает при одном условии — твоей включённости.</div></details>
+      <details class="qa"><summary>Я живу за границей — смогу оплатить?<span class="sign"></span></summary><div class="ans">Да. Подойдёт любая платёжная карта (VISA, MasterCard, МИР), а также Apple Pay и Google Pay.</div></details>
+      <details class="qa"><summary>Боярин жёсткий, мне бы помягче<span class="sign"></span></summary><div class="ans">Тогда не сюда. Это для тех, кому надоели мягкие подходы и общие слова.</div></details>
+    </div>
+    <div class="mt center"><a class="btn" href="#join">Вопросов нет — начинаю</a></div>
+  </div>
+</section>
+
+<!-- ДВА ПУТИ -->
+<section class="s-dark s-pad">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h-sec">У тебя сейчас два пути</h2><p class="lead">Оба начинаются одинаково, но через год разводят тебя в совершенно разные точки.</p></div>
+    <div class="paths">
+      <div class="path bad"><div class="plbl">Путь 1 · по умолчанию</div><h3>Ничего не меняешь</h3><p>Через полгода чувствуешь то же самое. Через пять лет — то же или хуже, потому что само это не рассасывается, а укореняется. Ещё один психолог, ещё одна книга, ещё один «а вдруг» ночью. Неужели ты всё ещё веришь, что ползком до Олимпа быстрее?</p></div>
+      <div class="path good"><div class="plbl">Путь 2 · требует решения</div><h3>Заходишь и начинаешь</h3><p>Сначала тревога — учишься держать себя. Потом отношения. Потом коммуникация. По теме в месяц, в среде, где это делают всерьёз. И рядом люди, которые тянут то же самое.</p></div>
+    </div>
+  <div class="mt center"><a class="btn" href="#join">Выбрать второй путь</a></div>
+  </div>
+</section>
+
+<!-- ФИНАЛ -->
+<section class="s-dark s-pad final">
+  <div class="wrap">
+    <span class="eyebrow">Решай сам</span>
+    <h2 class="h-sec">По первому пути ты идёшь по умолчанию</h2>
+    <p>Он не требует решения. По второму нужно нажать одну кнопку. Я не пишу «осталось три места» — цена не подскочит завтра. Но и тревога сама не рассосётся.</p>
+    <div class="cta">
+      <a class="btn" href="#join" style="font-size:1.05rem;padding:18px 40px">Зайти в клуб</a>
+      <div class="btn-meta on-dark">Жду тех, кто настрадался и готов наконец что-то с этим сделать</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">Андрей Боярин</div>
+    <div class="footer-tag">Психолог без цензуры · 2026 · нейминг клуба, цены и юр-данные финализируются</div>
+  </div>
+</footer>
+
+<div class="vw-modal" id="vwModal" aria-hidden="true"><div class="vw-modal-in"><button class="vw-close" aria-label="закрыть">×</button><div class="vw-modal-frame" id="vwFrame"></div><div class="vw-modal-name" id="vwModalName"></div></div></div>
+<script>
+(function(){
+  var track=document.getElementById('vwTrack'); if(!track) return;
+  var total=parseInt(track.dataset.total,10)||1;
+  var curEl=document.getElementById('vwCur'), prog=document.getElementById('vwProg');
+  var prev=document.getElementById('vwPrev'), next=document.getElementById('vwNext');
+  function cw(){var c=track.querySelector('.vw-card');return c?c.offsetWidth+18:300;}
+  function update(){
+    var max=track.scrollWidth-track.clientWidth;
+    var idx=Math.round(track.scrollLeft/cw())+1; if(idx<1)idx=1; if(idx>total)idx=total;
+    var p=max>0?track.scrollLeft/max:0;
+    if(curEl)curEl.textContent=('0'+idx).slice(-2);
+    if(prog)prog.style.width=(10+p*90)+'%';
+    if(prev)prev.disabled=track.scrollLeft<8;
+    if(next)next.disabled=track.scrollLeft>=max-8;
+  }
+  track.addEventListener('scroll',update,{passive:true});
+  if(prev)prev.addEventListener('click',function(){track.scrollBy({left:-cw()*2,behavior:'smooth'});});
+  if(next)next.addEventListener('click',function(){track.scrollBy({left:cw()*2,behavior:'smooth'});});
+  window.addEventListener('resize',update); update();
+  var modal=document.getElementById('vwModal'), frame=document.getElementById('vwFrame'), mname=document.getElementById('vwModalName');
+  track.addEventListener('click',function(e){
+    var c=e.target.closest('.vw-card'); if(!c)return; var id=c.dataset.vid; if(!id)return;
+    frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    if(mname)mname.textContent=(c.dataset.name||'')+' — видео-отзыв';
+    modal.classList.add('open'); document.body.style.overflow='hidden';
+  });
+  function close(){modal.classList.remove('open');frame.innerHTML='';document.body.style.overflow='';}
+  modal.addEventListener('click',function(e){if(e.target===modal||e.target.closest('.vw-close'))close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+<script>
+document.querySelectorAll('.video-play[data-kin]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://kinescope.io/embed/'+b.dataset.kin+'?autoplay=1';
+    f.allow='autoplay; fullscreen; picture-in-picture; encrypted-media; clipboard-write;';
+    f.setAttribute('allowfullscreen','');
+    b.parentNode.replaceChild(f,b);
+  });
+});
+</script>
+<script>
+(function(){
+  var nav=document.getElementById('siteNav'); if(!nav) return;
+  var hero=document.querySelector('.hero');
+  function onScroll(){
+    var h=hero?hero.offsetHeight-90:380;
+    if(window.scrollY>h){nav.classList.add('show');}else{nav.classList.remove('show');nav.classList.remove('open');}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var b=document.getElementById('navBurger');
+  if(b)b.addEventListener('click',function(){nav.classList.toggle('open');});
+  nav.querySelectorAll('.nav-links a, .nav-brand').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});
+})();
+</script>
+</body>
+</html>
