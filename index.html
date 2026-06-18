@@ -655,15 +655,16 @@ html{scroll-padding-top:66px}
         <div class="ptop">4000 ₽<span> /мес</span></div>
         <div class="pdesc">Помесячно, чтобы попробовать. Тренинг от тревоги — это твой первый месяц.</div>
         <ul><li>Весь тренинг от тревоги — первый месяц</li><li>Новая тема каждый месяц</li><li>Эфиры, подкасты, разборы фильмов</li><li>Сообщество и куратор</li></ul>
-        <a class="btn ghost on-light" href="#">Зайти на месяц — 4000 ₽</a>
+        <button class="btn ghost on-light pay-open" data-pay="month">Оплатить — 4000 ₽</button>
         <p class="pnote">Рекуррентный платёж · отмена в один клик</p>
       </div>
       <div class="pcard dark">
         <div class="ptag">3 месяца · выгоднее</div>
+        <div style="font-size:1rem;color:rgba(240,239,234,.5);text-decoration:line-through;line-height:1;margin-bottom:.18em">12 000 ₽</div>
         <div class="ptop">10 000 ₽<span> /3 мес</span></div>
         <div class="pdesc">Тревога → отношения → коммуникация. Все три ступени подряд. Экономия 2000 ₽ против помесячной.</div>
         <ul><li>Всё из тарифа «Месяц»</li><li>Три ступени подряд, без перерыва</li><li>Темп, в котором меняется жизнь, а не настроение</li><li>Доступ на 3 месяца</li></ul>
-        <a class="btn" href="#">Зайти на 3 месяца — 10 000 ₽</a>
+        <button class="btn pay-open" data-pay="q">Оплатить — 10 000 ₽</button>
         <p class="pnote">Разовый платёж за период</p>
       </div>
     </div>
@@ -677,17 +678,6 @@ html{scroll-padding-top:66px}
         <span>Даю согласие на получение информационных и рекламных рассылок.</span>
       </label>
     </div>
-    <script>
-    (function(){
-      var pdn=document.getElementById('consentPdn'),box=document.getElementById('consentBox'); if(!pdn) return;
-      document.querySelectorAll('#join .pcard .btn').forEach(function(b){
-        b.addEventListener('click',function(e){
-          if(!pdn.checked){e.preventDefault();if(box){box.style.outline='2px solid var(--orange)';box.style.outlineOffset='8px';box.scrollIntoView({block:'center',behavior:'smooth'});}pdn.focus();}
-        });
-      });
-      pdn.addEventListener('change',function(){if(pdn.checked&&box){box.style.outline='none';}});
-    })();
-    </script>
     <p class="mt center muted-l" style="max-width:700px;margin-inline:auto"><span class="hl">Посчитай.</span> Три месяца помесячно — это 12 000 ₽. Тариф на 3 месяца — 10 000 ₽: дешевле, и сразу все три ступени подряд. А первый месяц в любом тарифе — тот самый тренинг от тревоги, который отдельно стоит 40 000 ₽.</p>
   </div>
 </section>
@@ -849,6 +839,34 @@ document.querySelectorAll('.video-play[data-kin]').forEach(function(b){
     document.querySelectorAll('.rev-shot[data-tier="'+(step+1)+'"]').forEach(function(el){el.classList.remove('rev-hidden');});
     if(step>=2) btn.style.display='none';
   });
+})();
+</script>
+<style>
+.pay-modal{position:fixed;inset:0;z-index:10000;background:rgba(8,7,6,.9);backdrop-filter:blur(5px);display:none;place-items:center;padding:clamp(10px,3vw,28px)}
+.pay-modal.open{display:grid}
+.pay-modal-box{position:relative;width:min(480px,94vw);max-height:92vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 40px 90px -30px #000}
+.pay-modal-x{position:absolute;top:8px;right:8px;z-index:2;width:38px;height:38px;border-radius:50%;border:none;background:rgba(0,0,0,.06);color:#131211;font-size:22px;line-height:1;cursor:pointer}
+.pay-modal-x:hover{background:rgba(0,0,0,.12)}
+.pay-modal .pay-widget{width:100%}
+.pay-modal iframe{width:100%!important;border:0;display:block;border-radius:16px}
+</style>
+<div class="pay-modal" id="payModalMonth"><div class="pay-modal-box"><button class="pay-modal-x" aria-label="Закрыть">×</button><div class="pay-widget"><script id="c57b0bf8b15d48110961c985d22d3a7e78c7f9ce" src="https://learn.boarin.ru/pl/lite/widget/script?id=1619427"></script></div></div></div>
+<div class="pay-modal" id="payModalQ"><div class="pay-modal-box"><button class="pay-modal-x" aria-label="Закрыть">×</button><div class="pay-widget"><script id="b0bce564ed8b8fc4a20af56502a8a8902854bdf2" src="https://learn.boarin.ru/pl/lite/widget/script?id=1619428"></script></div></div></div>
+<script>
+(function(){
+  var pdn=document.getElementById('consentPdn'),box=document.getElementById('consentBox');
+  function nudge(){if(box){box.style.outline='2px solid var(--orange)';box.style.outlineOffset='8px';box.scrollIntoView({block:'center',behavior:'smooth'});}if(pdn)pdn.focus();}
+  function closeAll(){document.querySelectorAll('.pay-modal.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';}
+  document.querySelectorAll('#join .pay-open').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(pdn&&!pdn.checked){nudge();return;}
+      var m=document.getElementById('payModal'+(b.dataset.pay==='q'?'Q':'Month'));
+      if(m){m.classList.add('open');document.body.style.overflow='hidden';}
+    });
+  });
+  if(pdn)pdn.addEventListener('change',function(){if(pdn.checked&&box)box.style.outline='none';});
+  document.querySelectorAll('.pay-modal').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.pay-modal-x'))closeAll();});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
 })();
 </script>
 </body>
