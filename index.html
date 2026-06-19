@@ -58,7 +58,7 @@ h2.h-sec{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:cl
 .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(80% 50% at 50% 38%,rgba(236,89,42,.20) 0%,rgba(236,89,42,.09) 38%,transparent 72%)}
 @media(min-width:861px){.hero::before{background:radial-gradient(34% 70% at 50% 35%,rgba(236,89,42,.17) 0%,rgba(236,89,42,.07) 44%,transparent 82%)}}
 .hero-top{position:relative;z-index:3;padding:clamp(18px,3.4vh,30px) 20px clamp(2px,1vh,8px)}
-.pill{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--on-dark);padding:.55em 1.15em;border-radius:999px;border:1px solid var(--dark-line);background:rgba(240,239,234,.05);backdrop-filter:blur(4px)}
+.pill{display:inline-flex;align-items:center;gap:.55em;font-weight:700;font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--on-dark);padding:.55em 1.15em;border-radius:999px;border:1px solid var(--dark-line);background:rgba(240,239,234,.05);backdrop-filter:blur(4px);white-space:nowrap}
 .pill .dot{width:.45em;height:.45em;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}
 .hero-figure{position:relative;z-index:1;flex:1;min-height:clamp(270px,40vh,470px);overflow:hidden;pointer-events:none}
 .hero-fig-img{position:absolute;left:50%;top:0;transform:translateX(-50%);width:min(96vw,500px);height:auto;-webkit-mask-image:linear-gradient(to bottom,#000 56%,transparent 92%);mask-image:linear-gradient(to bottom,#000 56%,transparent 92%)}
@@ -234,7 +234,7 @@ details[open] .sign::after{transform:translate(-50%,-50%) scaleY(0)}
 .circ-arr{color:var(--orange);font-size:clamp(1.3rem,3vw,1.8rem);line-height:1}
 @media(max-width:560px){.circ-arr{transform:rotate(90deg)}.circles{flex-direction:column}.hero-btns{flex-direction:column;width:100%;max-width:320px;margin-inline:auto}.hero-btns>.btn{width:100%}}
 @media(max-width:620px){.dept-grid,.dept-grid.g3{grid-template-columns:1fr}.pain{grid-template-columns:1fr;gap:.4em}}
-@media(max-width:480px){.pill{letter-spacing:.18em;font-size:.64rem}}
+@media(max-width:480px){.pill{letter-spacing:.04em;font-size:.54rem;padding:.5em .85em}}@media(max-width:360px){.pill{font-size:.46rem;letter-spacing:.02em;padding:.45em .7em}}
 @media(hover:none){.btn:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none !important;scroll-behavior:auto !important;transition:none !important}}
 /* PHOTO */
@@ -362,7 +362,7 @@ html{scroll-padding-top:66px}
 
 <!-- HERO -->
 <header class="hero" id="top">
-  <div class="hero-top"><span class="pill"><span class="dot"></span>Клуб Андрея Боярина · психолог без цензуры</span></div>
+  <div class="hero-top"><span class="pill"><span class="dot"></span>Андрей Боярин · психолог без цензуры</span></div>
   <div class="hero-figure"><img class="hero-fig-img" src="img/hero-boyarin-cut.png" alt="Андрей Боярин"></div>
   <div class="hero-content">
     <p class="hero-kick">Выйти из цикла —</p>
@@ -479,7 +479,7 @@ html{scroll-padding-top:66px}
     <div class="read mt">
       <p class="muted-l">Боярин — настоящая фамилия. Офицер из Бреста: работал в МЧС начальником караула, вытаскивал людей из пожара. В 21 год руководил мужчинами вдвое старше себя.</p>
       <p class="muted-l mt">Восемь лет на практике: группы и личные консультации. Опора на КПТ, схема-терапию Янга, mindfulness и EMDR. Всё, что реально помогает, собрал в тренинг и клуб.</p>
-      <img class="photo-port mt" src="img/boyarin-expert.jpeg" alt="Андрей Боярин" style="max-width:400px;margin-inline:auto;border-color:var(--cream-line)">
+      <img class="photo-port mt" src="img/boyarin-expert.jpeg" alt="Андрей Боярин" width="813" height="508" style="max-width:400px;margin-inline:auto;border-color:var(--cream-line)">
       <div class="quote">«Вернуть себе спокойствие и умение выбирать, какие мысли смотреть, а какие выключать, — самый дорогой навык. Спокойствие — вот что бесценно всегда. Начинать нужно уже сегодня.»</div>
     </div>
     <div class="mt center"><a class="btn" href="#join">Пойти этим путём</a></div>
@@ -599,23 +599,23 @@ html{scroll-padding-top:66px}
   <div class="wrap">
     <div class="sec-head center"><span class="eyebrow">Текстовые отзывы</span><h2 class="h-sec">Сотни изменённых жизней</h2><p class="lead">Нажми на любой, чтобы открыть оригинал.</p></div>
     <div class="rev-wall">
-      <button class="rev-shot" data-full="img/reviews/r01.png" aria-label="Отзыв 1"><img loading="lazy" src="img/reviews/r01.png" alt="Отзыв клиента 1"></button>
-      <button class="rev-shot" data-full="img/reviews/r02.png" aria-label="Отзыв 2"><img loading="lazy" src="img/reviews/r02.png" alt="Отзыв клиента 2"></button>
-      <button class="rev-shot" data-full="img/reviews/r03.png" aria-label="Отзыв 3"><img loading="lazy" src="img/reviews/r03.png" alt="Отзыв клиента 3"></button>
-      <button class="rev-shot" data-full="img/reviews/r04.png" aria-label="Отзыв 4"><img loading="lazy" src="img/reviews/r04.png" alt="Отзыв клиента 4"></button>
-      <button class="rev-shot" data-full="img/reviews/r05.png" aria-label="Отзыв 5"><img loading="lazy" src="img/reviews/r05.png" alt="Отзыв клиента 5"></button>
-      <button class="rev-shot" data-full="img/reviews/r06.png" aria-label="Отзыв 6"><img loading="lazy" src="img/reviews/r06.png" alt="Отзыв клиента 6"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r07.png" aria-label="Отзыв 7"><img loading="lazy" src="img/reviews/r07.png" alt="Отзыв клиента 7"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r08.png" aria-label="Отзыв 8"><img loading="lazy" src="img/reviews/r08.png" alt="Отзыв клиента 8"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r09.png" aria-label="Отзыв 9"><img loading="lazy" src="img/reviews/r09.png" alt="Отзыв клиента 9"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r10.png" aria-label="Отзыв 10"><img loading="lazy" src="img/reviews/r10.png" alt="Отзыв клиента 10"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r11.png" aria-label="Отзыв 11"><img loading="lazy" src="img/reviews/r11.png" alt="Отзыв клиента 11"></button>
-      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r12.png" aria-label="Отзыв 12"><img loading="lazy" src="img/reviews/r12.png" alt="Отзыв клиента 12"></button>
-      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r13.png" aria-label="Отзыв 13"><img loading="lazy" src="img/reviews/r13.png" alt="Отзыв клиента 13"></button>
-      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r14.png" aria-label="Отзыв 14"><img loading="lazy" src="img/reviews/r14.png" alt="Отзыв клиента 14"></button>
-      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r15.png" aria-label="Отзыв 15"><img loading="lazy" src="img/reviews/r15.png" alt="Отзыв клиента 15"></button>
-      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r16.png" aria-label="Отзыв 16"><img loading="lazy" src="img/reviews/r16.png" alt="Отзыв клиента 16"></button>
-      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r17.png" aria-label="Отзыв 17"><img loading="lazy" src="img/reviews/r17.png" alt="Отзыв клиента 17"></button>
+      <button class="rev-shot" data-full="img/reviews/r01.png" aria-label="Отзыв 1"><img loading="lazy" src="img/reviews/r01.png" alt="Отзыв клиента 1" width="856" height="1506"></button>
+      <button class="rev-shot" data-full="img/reviews/r02.png" aria-label="Отзыв 2"><img loading="lazy" src="img/reviews/r02.png" alt="Отзыв клиента 2" width="1288" height="1704"></button>
+      <button class="rev-shot" data-full="img/reviews/r03.png" aria-label="Отзыв 3"><img loading="lazy" src="img/reviews/r03.png" alt="Отзыв клиента 3" width="974" height="910"></button>
+      <button class="rev-shot" data-full="img/reviews/r04.png" aria-label="Отзыв 4"><img loading="lazy" src="img/reviews/r04.png" alt="Отзыв клиента 4" width="976" height="1198"></button>
+      <button class="rev-shot" data-full="img/reviews/r05.png" aria-label="Отзыв 5"><img loading="lazy" src="img/reviews/r05.png" alt="Отзыв клиента 5" width="548" height="452"></button>
+      <button class="rev-shot" data-full="img/reviews/r06.png" aria-label="Отзыв 6"><img loading="lazy" src="img/reviews/r06.png" alt="Отзыв клиента 6" width="918" height="764"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r07.png" aria-label="Отзыв 7"><img loading="lazy" src="img/reviews/r07.png" alt="Отзыв клиента 7" width="1216" height="1152"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r08.png" aria-label="Отзыв 8"><img loading="lazy" src="img/reviews/r08.png" alt="Отзыв клиента 8" width="1100" height="1030"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r09.png" aria-label="Отзыв 9"><img loading="lazy" src="img/reviews/r09.png" alt="Отзыв клиента 9" width="1242" height="1282"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r10.png" aria-label="Отзыв 10"><img loading="lazy" src="img/reviews/r10.png" alt="Отзыв клиента 10" width="1188" height="1164"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r11.png" aria-label="Отзыв 11"><img loading="lazy" src="img/reviews/r11.png" alt="Отзыв клиента 11" width="1398" height="1402"></button>
+      <button class="rev-shot rev-hidden" data-tier="2" data-full="img/reviews/r12.png" aria-label="Отзыв 12"><img loading="lazy" src="img/reviews/r12.png" alt="Отзыв клиента 12" width="1116" height="1378"></button>
+      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r13.png" aria-label="Отзыв 13"><img loading="lazy" src="img/reviews/r13.png" alt="Отзыв клиента 13" width="1164" height="1544"></button>
+      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r14.png" aria-label="Отзыв 14"><img loading="lazy" src="img/reviews/r14.png" alt="Отзыв клиента 14" width="1606" height="1496"></button>
+      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r15.png" aria-label="Отзыв 15"><img loading="lazy" src="img/reviews/r15.png" alt="Отзыв клиента 15" width="1042" height="1230"></button>
+      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r16.png" aria-label="Отзыв 16"><img loading="lazy" src="img/reviews/r16.png" alt="Отзыв клиента 16" width="1502" height="1338"></button>
+      <button class="rev-shot rev-hidden" data-tier="3" data-full="img/reviews/r17.png" aria-label="Отзыв 17"><img loading="lazy" src="img/reviews/r17.png" alt="Отзыв клиента 17" width="1312" height="1820"></button>
     </div>
     <div class="rev-more-wrap"><button class="btn ghost on-light" id="revMore" type="button">Смотреть ещё</button></div>
     <div class="chan">
@@ -847,6 +847,21 @@ document.querySelectorAll('.video-play[data-kin]').forEach(function(b){
   });
   document.querySelectorAll('.pay-modal').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m||e.target.closest('.pay-modal-x'))closeAll();});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll();});
+})();
+</script>
+<script>
+(function(){
+  var T=function(){return document.getElementById('join');};
+  document.querySelectorAll('a[href="#join"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=T(); if(!t) return; e.preventDefault();
+      var cancel=false, stop=function(){cancel=true;};
+      window.addEventListener('wheel',stop,{passive:true,once:true});
+      window.addEventListener('touchmove',stop,{passive:true,once:true});
+      t.scrollIntoView({behavior:'smooth',block:'start'});
+      [500,1100,1800].forEach(function(d){setTimeout(function(){if(!cancel){var x=T();if(x)x.scrollIntoView({block:'start'});}},d);});
+    });
+  });
 })();
 </script>
 </body>
